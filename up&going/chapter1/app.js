@@ -16,12 +16,13 @@ const TAX_RATE = 0.21;
 const PHONE_PRICE = 3500;
 const ACCESORY_PRICE = 300;
 const SPENDING_THRESHOLD = 10000; //Umbral de gastos ~ El máximo de lo que debería gastar.
-const BANK_ACCOUNT_BALANCE = 20000;
 
+
+var bank_account_balance = Number(prompt('Ingrese la cantidad de dinero disponible en su cuenta bancaria, por favor:')) || 0;
 var totalPriceFormatted = '';
 var totalPrice = 0;
 
-while (totalPrice < BANK_ACCOUNT_BALANCE) {
+while (totalPrice < bank_account_balance) {
   totalPrice = totalPrice + PHONE_PRICE;
   if (totalPrice< SPENDING_THRESHOLD) {
     totalPrice = totalPrice + ACCESORY_PRICE;
@@ -39,8 +40,11 @@ function addFormatToPrice(price){
   return "$" + price.toFixed(2);
 }
 
-if (totalPrice > BANK_ACCOUNT_BALANCE) {
-  console.log('Usted no tiene el dinero suficiente para pagar esta compra.');
+if (totalPrice == 0) {
+  console.log('Con la cantidad ingresada no se puede realizar ninguna compra. Intente otra vez.');
+}
+else if (totalPrice < bank_account_balance) {
+  console.log('Usted puede pagar esta compra.')
 } else {
-  console.log('Puede pagar esta compra.')
+  console.log('Usted no tiene el dinero suficiente para pagar esta compra.');
 }
